@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: my-namespace
+  name: my-deployment
+spec:
+  selector:
+    matchLabels:
+      app: webapp-color
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: webapp-color
+    spec:
+      containers:
+      - name: webapp-color
+        image: leviditomazzo/web-color-a:v0.0.1
+        ports:
+        - containerPort: 80

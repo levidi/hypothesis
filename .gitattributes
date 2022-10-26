@@ -1,0 +1,7 @@
+* text=false
+
+*.js              eol=lf
+*.json            eol=lf
+*.sh              eol=lf
+*.txt             eol=lf
+*.yml             eol=lf

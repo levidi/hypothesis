@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  namespace: my-namespace
+  name: my-gateway-configuration
+spec:
+  selector:
+    istio: ingressgateway # Implementação padrão do Istio
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - mywebsite.com
+

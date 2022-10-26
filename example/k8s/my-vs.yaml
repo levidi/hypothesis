@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: vs-my-service
+  namespace: my-namespace
+spec:
+  gateways:
+  - my-gateway-configuration
+  hosts:
+  # - "*"
+  - mywebsite.com
+  http:
+  - match:
+    - headers:
+        x-custom-header:
+          exact: betatesters
+    route:
+    - destination:
+        host: my-service-ab-testing.my-namespace.svc.cluster.local
+  - route:
+    - destination:
+        host: my-service.my-namespace.svc.cluster.local
+
