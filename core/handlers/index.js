@@ -19,9 +19,9 @@ const createNewService = async (namespace, service, ports) => {
   return k8s.svc.create({ namespace, service })
 }
 
-const createABtestingVirtualService = async (namespace, serviceName, headers) => {
+const createABtestingVirtualService = async (namespace, hosts, serviceName, headers) => {
   const resourceName = `/networking.istio.io/v1alpha3/namespaces/${namespace}/virtualservices`
-  const data = istioVsTemplate.make(namespace, serviceName, headers)
+  const data = istioVsTemplate.make(namespace, hosts, serviceName, headers)
   return k8s.crd.create(resourceName, data)
     .then((result) => {
       if (result.statusCode !== 201) {
@@ -69,7 +69,10 @@ const getDeployAndService = (namespace, deploymentName, serviceName) => (
 
 const createABtesting = async ({ body }, res) => {
 
-  const { namespace, imageName, serviceName, deploymentName, containerName, headers, ports } = body
+  const { namespace,
+    imageName, serviceName,
+    deploymentName, containerName,
+    headers, ports, hosts } = body
 
   try {
 
@@ -84,7 +87,8 @@ const createABtesting = async ({ body }, res) => {
     if (!newObjK8S.success)
       return res.status(500).send(newObjK8S)
 
-    const virtualService = await createABtestingVirtualService(namespace, serviceName, headers)
+    const virtualService = (
+      await createABtestingVirtualService(namespace, hosts, serviceName, headers))
     if (!virtualService.success)
       return res.status(500).send(virtualService)
 

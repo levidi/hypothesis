@@ -1,0 +1,1 @@
+https://konghq.com/blog/istio-gateway

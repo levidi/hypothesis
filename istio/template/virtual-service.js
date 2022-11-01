@@ -1,4 +1,4 @@
-const make = (namespace, serviceName, headers) => {
+const make = (namespace, hosts, serviceName, headers) => {
   const virtualService = {
     apiVersion: 'networking.istio.io/v1alpha3',
     kind: 'VirtualService',
@@ -9,6 +9,7 @@ const make = (namespace, serviceName, headers) => {
     spec: {
       hosts: [
         `${serviceName}.${namespace}.svc.cluster.local`,
+        ...hosts,
       ],
       http: [
         {
