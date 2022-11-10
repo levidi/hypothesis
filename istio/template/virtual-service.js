@@ -1,10 +1,10 @@
-const make = (namespace, hosts, serviceName, headers) => {
+const make = (namespace, hosts, serviceName, headers, virtualServiceName) => {
   const virtualService = {
     apiVersion: 'networking.istio.io/v1alpha3',
     kind: 'VirtualService',
     metadata: {
-      namespace: `${namespace}`,
-      name: `vs-${serviceName}`,
+      namespace,
+      name: virtualServiceName,
     },
     spec: {
       hosts: [

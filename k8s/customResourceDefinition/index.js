@@ -25,6 +25,28 @@ const create = (resourceName, data) => new Promise((resolve, reject) => {
     },
   )
 })
-module.exports = {
-  create,
-}
+
+const remove = (resourceName) => new Promise((resolve, reject) => {
+  const options = {
+    ...serviceAccount,
+    json: true,
+  }
+  request.delete(
+    `${baseURL}/apis${resourceName}`,
+    options,
+    (error, response, body) => {
+      if (error) {
+        console.error(`error POST: ${error}`)
+        return reject(error)
+      }
+      console.info(`statusCode POST: ${response.statusCode}`)
+      console.info(`body: ${body}`)
+      return resolve({
+        body,
+        statusCode: response.statusCode,
+      })
+    },
+  )
+})
+
+module.exports = { create, remove }
