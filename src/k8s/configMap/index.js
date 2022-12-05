@@ -17,8 +17,6 @@ const get = ({ namespace, name }) => new Promise((resolve, reject) => {
         console.error(`error: ${error}`)
         return reject(error)
       }
-      console.info(`statusCode: ${response.statusCode}`)
-      console.info(`body: ${body}`)
       return resolve({
         body,
         statusCode: response.statusCode,
@@ -27,7 +25,7 @@ const get = ({ namespace, name }) => new Promise((resolve, reject) => {
   )
 })
 
-const create = ({ namespace, name }) => new Promise((resolve, reject) => {
+const create = ({ namespace, name, data }) => new Promise((resolve, reject) => {
   const options = {
     ...serviceAccount,
     json: {
@@ -37,10 +35,7 @@ const create = ({ namespace, name }) => new Promise((resolve, reject) => {
         namespace,
         name,
       },
-      data: {
-        'validate-profile.rego':
-                        'package security\n\ndefault allow = false\n',
-      },
+      data,
     },
   }
   request.post(
@@ -51,8 +46,6 @@ const create = ({ namespace, name }) => new Promise((resolve, reject) => {
         console.error(`error POST: ${error}`)
         return reject(error)
       }
-      console.info(`statusCode POST: ${response.statusCode}`)
-      console.info(`body: ${body}`)
       return resolve({
         body,
         statusCode: response.statusCode,
@@ -61,4 +54,25 @@ const create = ({ namespace, name }) => new Promise((resolve, reject) => {
   )
 })
 
-module.exports = { get, create }
+const update = ({ namespace, name, data }) => new Promise((resolve, reject) => {
+  const options = {
+    ...serviceAccount,
+    json: data,
+  }
+  request.put(
+    `${baseURL}/api/v1/namespaces/${namespace}/configmaps/${name}`,
+    options,
+    (error, response, body) => {
+      if (error) {
+        console.error(`error PUT: ${error}`)
+        return reject(error)
+      }
+      return resolve({
+        body,
+        statusCode: response.statusCode,
+      })
+    },
+  )
+})
+
+module.exports = { get, create, update }

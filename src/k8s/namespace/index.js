@@ -17,8 +17,6 @@ const get = (name) => new Promise((resolve, reject) => {
         console.error(`error: ${error}`)
         return reject(error)
       }
-      console.info(`statusCode: ${response.statusCode}`)
-      console.info(`body: ${body}`)
       return resolve({
         body,
         statusCode: response.statusCode,
@@ -47,8 +45,6 @@ const create = ({ name, labels }) => new Promise((resolve, reject) => {
         console.error(`error POST: ${error}`)
         return reject(error)
       }
-      console.info(`statusCode POST: ${response.statusCode}`)
-      console.info(`body: ${body}`)
       return resolve({
         body,
         statusCode: response.statusCode,
@@ -70,8 +66,6 @@ const remove = ({ name }) => new Promise((resolve, reject) => {
         console.error(`error POST: ${error}`)
         return reject(error)
       }
-      console.info(`statusCode POST: ${response.statusCode}`)
-      console.info(`body: ${body}`)
       return resolve({
         body,
         statusCode: response.statusCode,

@@ -16,7 +16,6 @@ const get = ({ namespace }) => new Promise((resolve, reject) => {
       if (error) {
         return reject(error)
       }
-      console.info(`body: ${body}`)
       return resolve({
         body,
         statusCode: response.statusCode,

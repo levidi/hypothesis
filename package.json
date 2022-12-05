@@ -2,14 +2,10 @@
   "name": "hypothesis",
   "version": "1.0.0",
   "description": "Kubernetes operator to manage deployments and Istio virtual service and other objects required for A/B testing",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": []
-    }
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "NODE_ENV=production HOST=0.0.0.0 PORT=3000 URL_K8S=http://127.0.0.1:8001 ./node_modules/nodemon/bin/nodemon.js --inspect=0.0.0.0:9229 ./src/index.js"
   },
   "keywords": [
     "k8s",
@@ -22,7 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "ajv": "8.11.0",
-    "ajv-keywords": "^5.1.0",
+    "ajv-keywords": "5.1.0",
     "express": "4.18.2",
     "jsonpatch": "3.1.0",
     "request": "2.88.2"
@@ -30,7 +26,6 @@
   "devDependencies": {
     "eslint": "8.25.0",
     "eslint-config-airbnb-base": "15.0.0",
-    "eslint-plugin-import": "2.26.0",
-    "husky": "4.3.8"
+    "nodemon": "2.0.20"
   }
 }

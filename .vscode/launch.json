@@ -8,14 +8,27 @@
             "type": "node",
             "request": "launch",
             "name": "Hypothesis",
-            "skipFiles": ["<node_internals>/**"],
-            "program": "${workspaceFolder}/index.js",
+            "skipFiles": [
+                "<node_internals>/**"
+            ],
+            "program": "${workspaceFolder}/src/index.js",
             "env": {
                 "HOST": "http://localhost",
                 "PORT": "3000",
                 "URL_K8S": "http://127.0.0.1:8001"
             },
-            "outFiles": ["${workspaceFolder}/**/*.js"]
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
+        },
+        {
+            "name": "Hypothesis Debug Docker",
+            "type": "node",
+            "request": "attach",
+            "port": 9229,
+            "restart": true,
+            "localRoot": "${workspaceFolder}",
+            "remoteRoot": "/"
         }
     ]
 }

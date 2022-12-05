@@ -16,8 +16,6 @@ const create = (resourceName, data) => new Promise((resolve, reject) => {
         console.error(`error POST: ${error}`)
         return reject(error)
       }
-      console.info(`statusCode POST: ${response.statusCode}`)
-      console.info(`body: ${body}`)
       return resolve({
         body,
         statusCode: response.statusCode,
@@ -39,8 +37,6 @@ const remove = (resourceName) => new Promise((resolve, reject) => {
         console.error(`error POST: ${error}`)
         return reject(error)
       }
-      console.info(`statusCode POST: ${response.statusCode}`)
-      console.info(`body: ${body}`)
       return resolve({
         body,
         statusCode: response.statusCode,
