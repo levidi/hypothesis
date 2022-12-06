@@ -1,7 +1,8 @@
 const request = require('request')
 
 const baseURL = process.env.URL_K8S
-const serviceAccount = { ca: process.env.CA, auth: process.env.AUTH }
+
+const serviceAccount = { ca: process.env.CA, auth: { bearer: process.env.AUTH } }
 
 const create = (resourceName, data) => new Promise((resolve, reject) => {
   const options = {

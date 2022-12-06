@@ -7,13 +7,13 @@
         {
             "type": "node",
             "request": "launch",
-            "name": "Hypothesis",
+            "name": "Hypothesis Local",
             "skipFiles": [
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/src/index.js",
             "env": {
-                "HOST": "http://localhost",
+                "HOST": "0.0.0.0",
                 "PORT": "3000",
                 "URL_K8S": "http://127.0.0.1:8001"
             },

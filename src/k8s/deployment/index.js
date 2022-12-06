@@ -3,7 +3,7 @@ const request = require('request')
 const baseURL = process.env.URL_K8S
 const resource = (namespace) => `/apis/apps/v1/namespaces/${namespace}/deployments`
 
-const serviceAccount = { ca: process.env.CA, auth: process.env.AUTH }
+const serviceAccount = { ca: process.env.CA, auth: { bearer: process.env.AUTH } }
 
 const create = ({ namespace, deployment }) => new Promise((resolve, reject) => {
   const options = {
