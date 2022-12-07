@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: hypothesis
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  namespace: hypothesis
+  name: hypothesis-admin
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: hypothesis
+  name: hypothesis
+  annotations:
+    kubernetes.io/service-account.name: hypothesis-admin
+type: kubernetes.io/service-account-token
