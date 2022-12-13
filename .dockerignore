@@ -1,7 +1,2 @@
-/example
-/.vscode
-/.gitattributes
-/.gitignore
-/README.md
-# *.crt
-# token
+*.crt
+token

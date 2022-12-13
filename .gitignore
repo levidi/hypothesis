@@ -106,3 +106,4 @@ dist
 # Kubernetes service account
 *.crt
 token
+draft/

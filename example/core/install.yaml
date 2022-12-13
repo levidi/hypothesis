@@ -34,11 +34,33 @@ spec:
         app: hypothesis
     spec:
       serviceAccountName: hypothesis-admin
+      # automountServiceAccountToken: false
       containers:
       - name: hypothesis
         image: leviditomazzo/hypothesis:0.0.1-beta
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: 500m
+            memory: 256Mi
         ports:
         - containerPort: 3000
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 30
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 3000
+            scheme: HTTP
+          initialDelaySeconds: 5
+          periodSeconds: 30
         env:
         - name: NODE_ENV
           value: 'production'

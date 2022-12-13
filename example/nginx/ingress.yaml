@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    app: hypothesis
+  name: hypothesis
+  namespace: hypothesis
+spec:
+  rules:
+  - host: hypothesis-hlg.com.br
+    http:
+      paths:
+      - backend:
+          service:
+            name: hypothesis
+            port:
+              name: http
+        path: /
+        pathType: Prefix

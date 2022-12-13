@@ -14,5 +14,5 @@ services:
         - NODE_ENV=development   #production
         - HOST=0.0.0.0
         - PORT=3000
-        - URL_K8S=https://kubernetes.docker.internal:6443 #http://host.docker.internal:8001 #URL_K8S=http://127.0.0.1:8001 #host.docker.internal
+        - URL_K8S=https://kubernetes.docker.internal:6443
       command: "./node_modules/nodemon/bin/nodemon.js --inspect=0.0.0.0:9229 --signal SIGINT --nolazy ./src/index.js"
