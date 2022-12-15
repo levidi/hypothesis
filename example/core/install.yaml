@@ -17,69 +17,69 @@ metadata:
   annotations:
     kubernetes.io/service-account.name: hypothesis-admin
 type: kubernetes.io/service-account-token
----
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  namespace: hypothesis
-  name: hypothesis
-spec:
-  selector:
-    matchLabels:
-      app: hypothesis
-  replicas: 1
-  template:
-    metadata:
-      labels:
-        app: hypothesis
-    spec:
-      serviceAccountName: hypothesis-admin
-      # automountServiceAccountToken: false
-      containers:
-      - name: hypothesis
-        image: leviditomazzo/hypothesis:0.0.1-beta
-        resources:
-          limits:
-            cpu: "1"
-            memory: 1Gi
-          requests:
-            cpu: 500m
-            memory: 256Mi
-        ports:
-        - containerPort: 3000
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-            scheme: HTTP
-          initialDelaySeconds: 5
-          periodSeconds: 30
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: 3000
-            scheme: HTTP
-          initialDelaySeconds: 5
-          periodSeconds: 30
-        env:
-        - name: NODE_ENV
-          value: 'production'
-        - name: HOST
-          value: '0.0.0.0'
-        - name: PORT
-          value: '3000'
-        - name: URL_K8S
-          value: 'https://kubernetes.default'
----
-apiVersion: v1
-kind: Service
-metadata:
-  namespace: hypothesis
-  name: hypothesis
-spec:
-  selector:
-    app: hypothesis
-  ports:
-    - name: http
-      port: 3000
-  type: ClusterIP
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   namespace: hypothesis
+#   name: hypothesis
+# spec:
+#   selector:
+#     matchLabels:
+#       app: hypothesis
+#   replicas: 1
+#   template:
+#     metadata:
+#       labels:
+#         app: hypothesis
+#     spec:
+#       serviceAccountName: hypothesis-admin
+#       # automountServiceAccountToken: false
+#       containers:
+#       - name: hypothesis
+#         image: leviditomazzo/hypothesis:0.0.1-beta
+#         resources:
+#           limits:
+#             cpu: "1"
+#             memory: 1Gi
+#           requests:
+#             cpu: 500m
+#             memory: 256Mi
+#         ports:
+#         - containerPort: 3000
+#         readinessProbe:
+#           httpGet:
+#             path: /health
+#             port: 3000
+#             scheme: HTTP
+#           initialDelaySeconds: 5
+#           periodSeconds: 30
+#         livenessProbe:
+#           httpGet:
+#             path: /health
+#             port: 3000
+#             scheme: HTTP
+#           initialDelaySeconds: 5
+#           periodSeconds: 30
+#         env:
+#         - name: NODE_ENV
+#           value: 'production'
+#         - name: HOST
+#           value: '0.0.0.0'
+#         - name: PORT
+#           value: '3000'
+#         - name: URL_K8S
+#           value: 'https://kubernetes.default'
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   namespace: hypothesis
+#   name: hypothesis
+# spec:
+#   selector:
+#     app: hypothesis
+#   ports:
+#     - name: http
+#       port: 3000
+#   type: ClusterIP

@@ -11,7 +11,7 @@ services:
         - 3000:3000
         - 9229:9229
       environment:
-        - NODE_ENV=development   #production
+        - NODE_ENV=development   #production development
         - HOST=0.0.0.0
         - PORT=3000
         - URL_K8S=https://kubernetes.docker.internal:6443

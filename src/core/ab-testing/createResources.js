@@ -6,6 +6,7 @@ const k8s = {
 
 const istioVsTemplate = require('../../istio/template/virtual-service')
 
+const tagAB = '-ab-testing'
 const resourceName = '/networking.istio.io/v1alpha3/namespaces'
 
 const createDeployService = (namespace, deployment, service) => {

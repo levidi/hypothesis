@@ -1,3 +1,5 @@
+const jsonpatch = require('jsonpatch')
+
 const tagAB = '-ab-testing'
 
 const renameObjectPropertys = (obj) => {

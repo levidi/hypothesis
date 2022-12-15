@@ -4,6 +4,9 @@ const k8s = {
     svc: require('../../k8s/service'),
 }
 
+const tagAB = '-ab-testing'
+const resourceName = '/networking.istio.io/v1alpha3/namespaces'
+
 const deleteDeployService = (data) => {
     const { namespace, deploymentName, serviceName } = data
     return Promise.all([
