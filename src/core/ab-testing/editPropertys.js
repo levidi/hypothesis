@@ -1,3 +1,12 @@
+const tagAB = '-ab-testing'
+
+const renameObjectPropertys = (obj) => {
+  for (const key in obj) {
+    if (obj.hasOwnProperty(key)) obj[key] += tagAB
+  }
+  return obj
+}
+
 const editDeploymentPropertys = (deployment, containerName, imageName) => {
   const patch = [
     { op: 'remove', path: '/metadata/uid' },
