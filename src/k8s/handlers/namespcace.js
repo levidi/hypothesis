@@ -13,14 +13,16 @@ const get = async ({ params }, res) => {
     .catch(({ code, message }) => res.status(code).json(message))
 }
 
-const remove = async ({ body }, res) => (
-  namespace.remove(body)
+const remove = async ({ params }, res) => (
+  namespace.remove(params)
     .then((result) => res.status(result.statusCode).send(result.body))
     .catch(({ code, message }) => res.status(code).json(message))
 )
 
-module.exports = {
-  create,
-  get,
-  remove,
-}
+const update = async ({ body, params }, res) => (
+  namespace.update(body, params.name)
+    .then((result) => res.status(result.statusCode).send(result.body))
+    .catch(({ code, message }) => res.status(code).json(message))
+)
+
+module.exports = { create, get, remove, update }

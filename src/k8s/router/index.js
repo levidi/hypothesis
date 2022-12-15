@@ -17,7 +17,8 @@ router.put('/configMap', configMap.update)
 
 router.post('/namespace', namespace.create)
 router.get('/namespace/:name?', namespace.get)
-router.delete('/namespace', namespace.remove)
+router.delete('/namespace/:name', namespace.remove)
+router.put('/namespace/:name', namespace.update)
 
 router.post('/deployment', deployment.create)
 router.put('/deployment/:name', deployment.update)

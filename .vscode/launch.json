@@ -29,6 +29,21 @@
             "restart": true,
             "localRoot": "${workspaceFolder}",
             "remoteRoot": "/"
+        },
+        {
+            "name": "Hypothesis Jest Debug",
+            "type": "node",
+            "request": "launch",
+            "env": {
+                "HOST": "0.0.0.0",
+                "PORT": "3000",
+                "URL_K8S": "http://127.0.0.1:8001"
+            },
+            "program": "${workspaceRoot}/node_modules/jest/bin/jest.js",
+            "internalConsoleOptions": "openOnSessionStart",
+            "outFiles": [
+                "${workspaceFolder}/**/*.js"
+            ]
         }
     ]
 }

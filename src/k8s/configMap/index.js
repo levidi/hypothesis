@@ -25,18 +25,10 @@ const get = ({ namespace, name }) => new Promise((resolve, reject) => {
   )
 })
 
-const create = ({ namespace, name, data }) => new Promise((resolve, reject) => {
+const create = (data) => new Promise((resolve, reject) => {
   const options = {
     ...serviceAccount,
-    json: {
-      apiVersion: 'v1',
-      kind: 'ConfigMap',
-      metadata: {
-        namespace,
-        name,
-      },
-      data,
-    },
+    json: data
   }
   request.post(
     `${baseURL}/api/v1/namespaces/${namespace}/configmaps`,

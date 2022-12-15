@@ -25,17 +25,10 @@ const get = (name) => new Promise((resolve, reject) => {
   )
 })
 
-const create = ({ name, labels }) => new Promise((resolve, reject) => {
+const create = ( data ) => new Promise((resolve, reject) => {
   const options = {
     ...serviceAccount,
-    json: {
-      apiVersion: 'v1',
-      kind: 'Namespace',
-      metadata: {
-        name,
-        labels,
-      },
-    },
+    json: data
   }
   request.post(
     `${baseURL}/api/v1/namespaces`,
@@ -74,4 +67,25 @@ const remove = ({ name }) => new Promise((resolve, reject) => {
   )
 })
 
-module.exports = { get, create, remove }
+const update = (data, name) => new Promise((resolve, reject) => {
+  const options = {
+    ...serviceAccount,
+    json: data
+  }
+  request.put(
+    `${baseURL}/api/v1/namespaces/${name}`,
+    options,
+    (error, response, body) => {
+      if (error) {
+        console.error(`error POST: ${error}`)
+        return reject(error)
+      }
+      return resolve({
+        body,
+        statusCode: response.statusCode,
+      })
+    },
+  )
+})
+
+module.exports = { get, create, remove, update }
