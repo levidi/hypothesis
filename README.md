@@ -26,3 +26,4 @@ kubectl apply -f https://raw.githubusercontent.com/levidi/hypothesis/releases/la
 ```bash
 kubectl apply -f https://raw.githubusercontent.com/levidi/hypothesis/releases/latest/<tag_version>example/core/install.yaml
 ```
+
