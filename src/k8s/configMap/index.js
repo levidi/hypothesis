@@ -31,7 +31,7 @@ const create = (data) => new Promise((resolve, reject) => {
     json: data
   }
   request.post(
-    `${baseURL}/api/v1/namespaces/${namespace}/configmaps`,
+    `${baseURL}/api/v1/namespaces/${data.metadata.namespace}/configmaps`,
     options,
     (error, response, body) => {
       if (error) {

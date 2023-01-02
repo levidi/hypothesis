@@ -5,6 +5,12 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "command": "npm run test",
+            "name": "Hypothesis Debug Local Test",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
             "type": "node",
             "request": "launch",
             "name": "Hypothesis Local",

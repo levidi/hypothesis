@@ -1,8 +1,8 @@
 const request = require('supertest')
-
+const { v4: uuidv4 } = require('uuid');
 const app = require('../../../app')
 
-const nameOfNamespace = 'my-namespace-test'
+const nameOfNamespace = `my-namespace-test-${uuidv4()}`
 let data = {
     "kind": "Namespace",
     "apiVersion": "v1",
@@ -81,7 +81,3 @@ describe('Test K8S Namespace', () => {
             })
     })
 })
-
-
-
-
