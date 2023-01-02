@@ -46,7 +46,7 @@ const create = (data) => new Promise((resolve, reject) => {
   )
 })
 
-const update = ({ namespace, name, data }) => new Promise((resolve, reject) => {
+const update = (namespace, name, data) => new Promise((resolve, reject) => {
   const options = {
     ...serviceAccount,
     json: data,
@@ -67,4 +67,25 @@ const update = ({ namespace, name, data }) => new Promise((resolve, reject) => {
   )
 })
 
-module.exports = { get, create, update }
+const remove = ({ namespace, name }) => new Promise((resolve, reject) => {
+  const options = {
+    ...serviceAccount,
+    json: true,
+  }
+  request.delete(
+    `${baseURL}/api/v1/namespaces/${namespace}/configmaps/${name}`,
+    options,
+    (error, response, body) => {
+      if (error) {
+        console.error(`error: ${error}`)
+        return reject(error)
+      }
+      return resolve({
+        body,
+        statusCode: response.statusCode,
+      })
+    },
+  )
+})
+
+module.exports = { get, create, update, remove }

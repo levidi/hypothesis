@@ -14,6 +14,7 @@ router.get('/pod/:namespace', pod.get)
 router.post('/configMap', configMap.create)
 router.get('/configMap/:namespace/:name', configMap.get)
 router.put('/configMap', configMap.update)
+router.delete('/configMap', configMap.remove)
 
 router.post('/namespace', namespace.create)
 router.get('/namespace/:name?', namespace.get)
