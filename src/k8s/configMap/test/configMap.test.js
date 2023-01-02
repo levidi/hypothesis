@@ -16,14 +16,14 @@ let data = {
     }
 }
 
-describe('Test K8S Deployment', () => {
+describe('Test K8S ConfigMap', () => {
 
     beforeAll(() => common.createNamespace(nameOfNamespace))
     afterAll(() => common.deleteNamespace(nameOfNamespace))
 
     test('create new configMap', (done) => {
         request(app)
-            .post('/deployment')
+            .post('/configMap')
             .expect('Content-Type', /json/)
             .send(data)
             .expect(201)
@@ -36,7 +36,7 @@ describe('Test K8S Deployment', () => {
 
     test('get existent configMap ', (done) => {
         request(app)
-            .get(`/deployment/${nameOfNamespace}/${nameOfConfigMap}`)
+            .get(`/configMap/${nameOfNamespace}/${nameOfConfigMap}`)
             .expect('Content-Type', /json/)
             .expect(200)
             .expect((res) => {
@@ -48,21 +48,9 @@ describe('Test K8S Deployment', () => {
             })
     })
 
-    test('try to create configMap with invalid arguments', (done) => {
-        request(app)
-            .post('/deployment')
-            .send({})
-            .expect(400)
-            .end((err) => {
-                if (err)
-                    return done(err)
-                return done()
-            })
-    })
-
     test('try to get nonexistent nameOfConfigMap', (done) => {
         request(app)
-            .get(`/deployment/${nameOfNamespace}/some-invalid-name`)
+            .get(`/configMap/${nameOfNamespace}/some-invalid-name`)
             .expect('Content-Type', /json/)
             .expect(404)
             .end((err) => {
@@ -74,7 +62,7 @@ describe('Test K8S Deployment', () => {
     test('update nameOfConfigMap adding property annotations', (done) => {
         data.metadata.annotations = { newProperty: 'newValue' }
         request(app)
-            .put(`/deployment/${nameOfDeployment}`)
+            .put(`/configMap`)
             .expect('Content-Type', /json/)
             .send(data)
             .expect(200)
@@ -89,7 +77,7 @@ describe('Test K8S Deployment', () => {
 
     test('delete configMap', (done) => {
         request(app)
-            .delete('/deployment')
+            .delete('/configMap')
             .expect('Content-Type', /json/)
             .send({
                 namespace: nameOfNamespace,
